@@ -73,11 +73,12 @@ spec:
           status:
             description: The current status of this catalog.
             properties:
-              domains:
-                description: Domains are the domains of the Catalog API.
-                items:
-                  type: string
-                type: array
+              devPortalDomain:
+                description: DevPortalDomain is the domain for accessing the dev portal.
+                type: string
+              domain:
+                description: Domain is the hub generated domain of the Catalog API.
+                type: string
               services:
                 items:
                   description: CatalogServiceStatus is the status of a Service within
@@ -106,7 +107,7 @@ spec:
               version:
                 type: string
             required:
-            - domains
+            - domain
             - urls
             type: object
         type: object
