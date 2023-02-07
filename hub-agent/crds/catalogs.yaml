@@ -16,106 +16,112 @@ spec:
     singular: catalog
   scope: Cluster
   versions:
-  - additionalPrinterColumns:
-    - jsonPath: .status.urls
-      name: URLs
-      type: string
-    name: v1alpha1
-    schema:
-      openAPIV3Schema:
-        description: Catalog defines a catalog.
-        properties:
-          apiVersion:
-            description: 'APIVersion defines the versioned schema of this representation
+    - additionalPrinterColumns:
+        - jsonPath: .status.urls
+          name: URLs
+          type: string
+      name: v1alpha1
+      schema:
+        openAPIV3Schema:
+          description: Catalog defines a catalog.
+          properties:
+            apiVersion:
+              description: 'APIVersion defines the versioned schema of this representation
               of an object. Servers should convert recognized schemas to the latest
               internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources'
-            type: string
-          kind:
-            description: 'Kind is a string value representing the REST resource this
+              type: string
+            kind:
+              description: 'Kind is a string value representing the REST resource this
               object represents. Servers may infer this from the endpoint the client
               submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds'
-            type: string
-          metadata:
-            type: object
-          spec:
-            description: The desired behavior of this catalog.
-            properties:
-              customDomains:
-                description: CustomDomains are the custom domains under which the
-                  API will be exposed.
-                items:
+              type: string
+            metadata:
+              type: object
+            spec:
+              description: The desired behavior of this catalog.
+              properties:
+                customDomains:
+                  description: CustomDomains are the custom domains under which the
+                    API will be exposed.
+                  items:
+                    type: string
+                  type: array
+                description:
                   type: string
-                type: array
-              description:
-                type: string
-              services:
-                description: Services are the list of Services available in the Catalog.
-                items:
-                  description: CatalogService defines how a Kubernetes Service is
-                    exposed within a Catalog.
-                  properties:
-                    name:
-                      type: string
-                    namespace:
-                      type: string
-                    openApiSpecUrl:
-                      type: string
-                    pathPrefix:
-                      type: string
-                    port:
-                      type: integer
-                  required:
-                  - name
-                  - namespace
-                  - pathPrefix
-                  - port
-                  type: object
-                type: array
-            type: object
-          status:
-            description: The current status of this catalog.
-            properties:
-              devPortalDomain:
-                description: DevPortalDomain is the domain for accessing the dev portal.
-                type: string
-              domain:
-                description: Domain is the hub generated domain of the Catalog API.
-                type: string
-              services:
-                items:
-                  description: CatalogServiceStatus is the status of a Service within
-                    a Catalog.
-                  properties:
-                    name:
-                      type: string
-                    namespace:
-                      type: string
-                    openApiSpecUrl:
-                      type: string
-                  required:
-                  - name
-                  - namespace
-                  type: object
-                type: array
-              specHash:
-                description: SpecHash is a hash representing the CatalogSpec
-                type: string
-              syncedAt:
-                format: date-time
-                type: string
-              urls:
-                description: URLs are the URLs for accessing the Catalog API.
-                type: string
-              version:
-                type: string
-            required:
-            - domain
-            - urls
-            type: object
-        type: object
-    served: true
-    storage: true
-    subresources: {}
+                services:
+                  description: Services are the list of Services available in the Catalog.
+                  items:
+                    description: CatalogService defines how a Kubernetes Service is
+                      exposed within a Catalog.
+                    properties:
+                      name:
+                        type: string
+                      namespace:
+                        type: string
+                      openApiSpecUrl:
+                        type: string
+                      pathPrefix:
+                        type: string
+                      port:
+                        type: integer
+                    required:
+                      - name
+                      - namespace
+                      - pathPrefix
+                      - port
+                    type: object
+                  type: array
+              type: object
+            status:
+              description: The current status of this catalog.
+              properties:
+                customDomains:
+                  description: CustomDomains are the custom domains for accessing the
+                    exposed service.
+                  items:
+                    type: string
+                  type: array
+                devPortalDomain:
+                  description: DevPortalDomain is the domain for accessing the dev portal.
+                  type: string
+                domain:
+                  description: Domain is the hub generated domain of the Catalog API.
+                  type: string
+                hash:
+                  description: Hash is a hash representing the Catalog.
+                  type: string
+                services:
+                  items:
+                    description: CatalogServiceStatus is the status of a Service within
+                      a Catalog.
+                    properties:
+                      name:
+                        type: string
+                      namespace:
+                        type: string
+                      openApiSpecUrl:
+                        type: string
+                    required:
+                      - name
+                      - namespace
+                    type: object
+                  type: array
+                syncedAt:
+                  format: date-time
+                  type: string
+                urls:
+                  description: URLs are the URLs for accessing the Catalog API.
+                  type: string
+                version:
+                  type: string
+              required:
+                - domain
+                - urls
+              type: object
+          type: object
+      served: true
+      storage: true
+      subresources: {}
 status:
   acceptedNames:
     kind: ""
